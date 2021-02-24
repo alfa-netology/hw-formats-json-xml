@@ -14,3 +14,16 @@ def read_json(file, max_len_word=6, top_words=10):
         counter_words = collections.Counter(description_words)
     print(counter_words.most_common(top_words))
 
+
+def read_xml(file, max_len_word=6, top_words=10):
+    tree = ET.parse(file)
+    news = tree.findall('.//description')
+
+    description_words = []
+
+    for description in news:
+        description_words.extend([word for word in description.text.split() if len(word) > max_len_word])
+        counter_words = collections.Counter(description_words)
+    print(counter_words.most_common(top_words))
+
+
